@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reservation{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">New Reservation</h4>
+            </div>
+
+            <div class="card-body p-4">
+                {{ include('reservation/_form.html.twig', {'button_label': 'Create Reservation'}) }}
+
+                <div class="mt-3">
+                    <a class="btn btn-outline-secondary" href="{{ path('app_reservation_index') }}">Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

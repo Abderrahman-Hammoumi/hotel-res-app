@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rooms{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <div>
+            <h1 class="mb-1">Rooms</h1>
+            <p class="text-muted mb-0">Available: {{ availableRooms|length }} / {{ totalRooms }}</p>
+        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="btn btn-primary" href="{{ path('app_room_new') }}">Add Room</a>
+        {% endif %}
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-success text-white fw-semibold">Available</div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0 align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Number</th>
+                                <th>Type</th>
+                                <th>Capacity</th>
+                                <th>Price</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for room in availableRooms %}
+                            <tr>
+                                <td>Room {{ room.number }}</td>
+                                <td>{{ room.type }}</td>
+                                <td>{{ room.capacity }} guests</td>
+                                <td>{{ room.price }} MAD</td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-primary" href="{{ path('app_room_show', {'id': room.id}) }}">Show</a>
+                                    <a class="btn btn-sm btn-warning" href="{{ path('app_room_edit', {'id': room.id}) }}">Edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-3">No available rooms.</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-danger text-white fw-semibold">Not available</div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0 align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Number</th>
+                                <th>Type</th>
+                                <th>Capacity</th>
+                                <th>Price</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for room in unavailableRooms %}
+                            <tr>
+                                <td>Room {{ room.number }}</td>
+                                <td>{{ room.type }}</td>
+                                <td>{{ room.capacity }} guests</td>
+                                <td>{{ room.price }} MAD</td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-primary" href="{{ path('app_room_show', {'id': room.id}) }}">Show</a>
+                                    <a class="btn btn-sm btn-warning" href="{{ path('app_room_edit', {'id': room.id}) }}">Edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-3">No unavailable rooms.</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

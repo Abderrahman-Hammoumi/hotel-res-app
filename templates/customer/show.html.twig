@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customer Details{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 mb-3">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Customer #{{ customer.id }}</h5>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="text-muted">Name</th>
+                            <td>{{ customer.FullName }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-muted">Email</th>
+                            <td>{{ customer.email }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-muted">Phone</th>
+                            <td>{{ customer.phone ?: '-' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a class="btn btn-secondary" href="{{ path('app_customer_index') }}">Back</a>
+            <a class="btn btn-warning" href="{{ path('app_customer_edit', {'id': customer.id}) }}">Edit</a>
+            <a class="btn btn-success" href="{{ path('app_reservation_new', {'customer': customer.id}) }}">Add reservation</a>
+            {{ include('customer/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
+{% endblock %}

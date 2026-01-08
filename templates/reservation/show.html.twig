@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation Details{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center mt-4">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0 mb-3">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Reservation #{{ reservation.id }}</h5>
+                {% if reservation.status == 'pending' %}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                {% elseif reservation.status == 'confirmed' %}
+                    <span class="badge bg-success">Confirmed</span>
+                {% elseif reservation.status == 'canceled' %}
+                    <span class="badge bg-danger">Canceled</span>
+                {% else %}
+                    <span class="badge bg-secondary">{{ reservation.status }}</span>
+                {% endif %}
+            </div>
+
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Customer</h6>
+                        <p class="mb-1 fw-semibold">{{ reservation.customer.fullName }}</p>
+                        <div class="small text-muted">{{ reservation.customer.email }}</div>
+                        {% if reservation.customer.phone %}
+                            <div class="small text-muted">{{ reservation.customer.phone }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Room</h6>
+                        <p class="mb-1 fw-semibold">Room {{ reservation.room.number }} - {{ reservation.room.type }}</p>
+                        <div class="small text-muted">Capacity: {{ reservation.room.capacity }} guests</div>
+                        <div class="small text-muted">Rate: {{ reservation.room.price }} MAD / night</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Stay</h6>
+                        <div class="mb-2">Check-in: <strong>{{ reservation.CheckIn ? reservation.CheckIn|date('Y-m-d') : '' }}</strong></div>
+                        <div class="mb-2">Check-out: <strong>{{ reservation.CheckOut ? reservation.CheckOut|date('Y-m-d') : '' }}</strong></div>
+                        <div class="mb-2">Nights: <strong>{{ reservation.nights }}</strong></div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Billing</h6>
+                        {% set nights = reservation.nights %}
+                        {% set baseAmount = reservation.room.price * nights %}
+                        {% set options = reservation.readableOptions %}
+                        {% set optionsTotal = reservation.optionsTotal %}
+
+                        <ul class="list-unstyled mb-2">
+                            <li>Room: {{ reservation.room.price }} MAD x {{ nights }} night(s) = <strong>{{ baseAmount }} MAD</strong></li>
+                            <li class="mt-2">Options:
+                                {% if options is not empty %}
+                                    <ul class="mb-0">
+                                        {% for option in options %}
+                                            <li>{{ option }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <span class="text-muted">None (0 MAD)</span>
+                                {% endif %}
+                            </li>
+                            <li class="mt-2">Options total: <strong>{{ optionsTotal }} MAD</strong></li>
+                        </ul>
+
+                        <div class="fw-bold fs-5 text-primary">Total: {{ reservation.totalPrice }} MAD</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a class="btn btn-secondary" href="{{ path('app_reservation_index') }}">Back</a>
+            <a class="btn btn-warning" href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">Edit</a>
+            {{ include('reservation/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
+{% endblock %}

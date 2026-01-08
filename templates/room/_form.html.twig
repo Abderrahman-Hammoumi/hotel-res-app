@@ -1,0 +1,44 @@
+{{ form_start(form) }}
+
+{% if form.number is defined %}
+    <div class="mb-3">
+        {{ form_label(form.number) }}
+        {{ form_widget(form.number, {'attr': {'class': 'form-control', 'placeholder': 'Room number'}}) }}
+        {{ form_errors(form.number) }}
+    </div>
+{% endif %}
+
+{% if form.type is defined %}
+    <div class="mb-3">
+        {{ form_label(form.type) }}
+        {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'Single / Double / Suite'}}) }}
+        {{ form_errors(form.type) }}
+    </div>
+{% endif %}
+
+{% if form.capacity is defined %}
+    <div class="mb-3">
+        {{ form_label(form.capacity) }}
+        {{ form_widget(form.capacity, {'attr': {'class': 'form-control', 'placeholder': 'Number of guests'}}) }}
+        {{ form_errors(form.capacity) }}
+    </div>
+{% endif %}
+
+{% if form.price is defined %}
+    <div class="mb-3">
+        {{ form_label(form.price) }}
+        {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'Price per night'}}) }}
+        {{ form_errors(form.price) }}
+    </div>
+{% endif %}
+
+{% if form.isAvailable is defined %}
+    <div class="form-check mb-4">
+        {{ form_widget(form.isAvailable, {'attr': {'class': 'form-check-input'}}) }}
+        {{ form_label(form.isAvailable, null, {'label_attr': {'class': 'form-check-label'}}) }}
+    </div>
+{% endif %}
+
+<button class="btn btn-primary w-100">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

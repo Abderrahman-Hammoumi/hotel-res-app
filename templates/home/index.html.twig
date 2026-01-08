@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard | HotelRes{% endblock %}
+
+{% block body %}
+<h1 class="fw-bold mb-4">Dashboard</h1>
+
+<div class="row g-4">
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Total Rooms</h6>
+                <h2 class="fw-bold">{{ totalRooms }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Available Rooms</h6>
+                <h2 class="fw-bold text-success">{{ availableRooms }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Reservations</h6>
+                <h2 class="fw-bold">{{ totalReservations }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Customers</h6>
+                <h2 class="fw-bold">{{ totalCustomers }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="mt-5">
+    {% if is_granted('ROLE_RECEPTIONIST') %}
+        <h4 class="fw-bold mb-3">Quick Actions</h4>
+
+        <div class="d-flex flex-wrap gap-2">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-primary" href="{{ path('app_room_new') }}">Add Room</a>
+            {% endif %}
+            <a class="btn btn-secondary" href="{{ path('app_customer_new') }}">Add Customer</a>
+            <a class="btn btn-success" href="{{ path('app_reservation_new') }}">Add Reservation</a>
+        </div>
+    {% elseif is_granted('ROLE_CLIENT') %}
+        <h4 class="fw-bold mb-3">Your account</h4>
+        <a class="btn btn-outline-primary" href="{{ path('app_my_reservations') }}">View my reservations</a>
+    {% endif %}
+</div>
+{% endblock %}
