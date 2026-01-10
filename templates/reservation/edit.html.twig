@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Reservation{% endblock %}
+{% block title %}{{ 'reservation.edit.title'|trans }}{% endblock %}
 
 {% block body %}
 <div class="row justify-content-center mt-4">
     <div class="col-md-7">
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-warning">
-                <h4 class="mb-0">Edit Reservation</h4>
+            <div class="card-header">
+                <h4 class="mb-0">{{ 'reservation.edit.title'|trans }}</h4>
             </div>
 
             <div class="card-body p-4">
-                {{ include('reservation/_form.html.twig', {'button_label': 'Update Reservation'}) }}
+                {{ include('reservation/_form.html.twig', {'button_label': 'action.update'}) }}
 
                 <div class="d-flex justify-content-between mt-3">
-                    <a class="btn btn-outline-secondary" href="{{ path('app_reservation_index') }}">Back</a>
+                    <a class="btn btn-outline-secondary" href="{{ path('app_reservation_index') }}">{{ 'action.back'|trans }}</a>
                     {{ include('reservation/_delete_form.html.twig') }}
                 </div>
             </div>

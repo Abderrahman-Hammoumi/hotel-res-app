@@ -19,36 +19,42 @@ class ReservationType extends AbstractType
         $builder
             ->add('CheckIn', DateType::class, [
                 'widget' => 'single_text',
+                'label' => 'reservation.form.check_in',
             ])
             ->add('CheckOut', DateType::class, [
                 'widget' => 'single_text',
+                'label' => 'reservation.form.check_out',
             ])
             ->add('options', ChoiceType::class, [
                 'choices' => $this->getOptionChoices(),
                 'expanded' => true,
                 'multiple' => true,
                 'required' => false,
-                'label' => 'Additional options',
-                'help' => 'Optional services are billed once per stay.',
+                'label' => 'reservation.form.extras',
+                'help' => 'reservation.form.extras_help',
             ])
             ->add('status', ChoiceType::class, [
+                'label' => 'reservation.form.status',
                 'choices' => [
-                    'Pending' => 'pending',
-                    'Confirmed' => 'confirmed',
-                    'Canceled' => 'canceled',
+                    'reservation.status.pending' => 'pending',
+                    'reservation.status.confirmed' => 'confirmed',
+                    'reservation.status.canceled' => 'canceled',
                 ],
+                'choice_translation_domain' => 'messages',
             ])
             ->add('room', EntityType::class, [
                 'class' => Room::class,
                 'choice_label' => function (Room $room) {
                     return 'Room #' . $room->getNumber() . ' - ' . $room->getType() . ' - ' . $room->getPrice() . ' MAD';
                 },
+                'label' => 'reservation.form.select_room',
             ])
             ->add('customer', EntityType::class, [
                 'class' => Customer::class,
                 'choice_label' => function (Customer $customer) {
                     return $customer->getFullName() . ' (' . $customer->getEmail() . ')';
                 },
+                'label' => 'reservation.form.select_customer',
             ]);
     }
 

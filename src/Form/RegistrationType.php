@@ -17,14 +17,14 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('fullName', TextType::class, [
-                'label' => 'Full name',
+                'label' => 'auth.full_name',
                 'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Length(min: 3, max: 100),
                 ],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email',
+                'label' => 'auth.email',
                 'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Email(),
@@ -32,15 +32,15 @@ class RegistrationType extends AbstractType
                 ],
             ])
             ->add('phone', TelType::class, [
-                'label' => 'Phone (optional)',
+                'label' => 'auth.phone_optional',
                 'required' => false,
                 'constraints' => [
                     new Assert\Length(max: 20),
-                    new Assert\Regex(pattern: '/^$|^[0-9 +()\\-]{6,20}$/', message: 'Please enter a valid phone number.'),
+                    new Assert\Regex(pattern: '/^$|^[0-9 +()\\-]{6,20}$/', message: 'auth.phone_invalid'),
                 ],
             ])
             ->add('password', PasswordType::class, [
-                'label' => 'Password',
+                'label' => 'auth.password',
                 'mapped' => false,
                 'constraints' => [
                     new Assert\NotBlank(),

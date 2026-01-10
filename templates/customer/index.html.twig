@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Customers{% endblock %}
+{% block title %}{{ 'nav.customers'|trans }}{% endblock %}
 
 {% block body %}
-<div class="container mt-4">
+<div class="mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="mb-0">Customers</h1>
-        <a class="btn btn-primary" href="{{ path('app_customer_new') }}">Add Customer</a>
+        <h1 class="mb-0">{{ 'customers.title'|trans }}</h1>
+        <a class="btn btn-primary" href="{{ path('app_customer_new') }}">{{ 'customers.add_customer'|trans }}</a>
     </div>
 
     <div class="card shadow-sm border-0">
@@ -15,10 +15,10 @@
                 <thead class="table-dark">
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th class="text-center">Actions</th>
+                        <th>{{ 'field.name'|trans }}</th>
+                        <th>{{ 'field.email'|trans }}</th>
+                        <th>{{ 'field.phone'|trans }}</th>
+                        <th class="text-center">{{ 'rooms.actions'|trans }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,14 +29,14 @@
                         <td>{{ customer.email }}</td>
                         <td>{{ customer.phone ?: '-' }}</td>
                         <td class="text-center">
-                            <a class="btn btn-sm btn-primary" href="{{ path('app_customer_show', {'id': customer.id}) }}">Show</a>
-                            <a class="btn btn-sm btn-warning" href="{{ path('app_customer_edit', {'id': customer.id}) }}">Edit</a>
-                            <a class="btn btn-sm btn-success" href="{{ path('app_reservation_new', {'customer': customer.id}) }}">Add reservation</a>
+                            <a class="btn btn-sm btn-primary" href="{{ path('app_customer_show', {'id': customer.id}) }}">{{ 'action.show'|trans }}</a>
+                            <a class="btn btn-sm btn-warning" href="{{ path('app_customer_edit', {'id': customer.id}) }}">{{ 'action.edit'|trans }}</a>
+                            <a class="btn btn-sm btn-success" href="{{ path('app_reservation_new', {'customer': customer.id}) }}">{{ 'customers.add_reservation'|trans }}</a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5" class="text-center text-muted py-3">No customers found.</td>
+                        <td colspan="5" class="text-center text-muted py-3">{{ 'customers.none_found'|trans }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

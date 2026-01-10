@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservation Details{% endblock %}
+{% block title %}{{ 'reservation.details.title'|trans }}{% endblock %}
 
 {% block body %}
 <div class="row justify-content-center mt-4">
     <div class="col-lg-8">
         <div class="card shadow-sm border-0 mb-3">
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Reservation #{{ reservation.id }}</h5>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">{{ 'reservation.details.header'|trans({'%id%': reservation.id}) }}</h5>
                 {% if reservation.status == 'pending' %}
-                    <span class="badge bg-warning text-dark">Pending</span>
+                    <span class="badge bg-warning text-dark">{{ 'reservation.status.pending'|trans }}</span>
                 {% elseif reservation.status == 'confirmed' %}
-                    <span class="badge bg-success">Confirmed</span>
+                    <span class="badge bg-success">{{ 'reservation.status.confirmed'|trans }}</span>
                 {% elseif reservation.status == 'canceled' %}
-                    <span class="badge bg-danger">Canceled</span>
+                    <span class="badge bg-danger">{{ 'reservation.status.canceled'|trans }}</span>
                 {% else %}
                     <span class="badge bg-secondary">{{ reservation.status }}</span>
                 {% endif %}
@@ -22,7 +22,7 @@
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <h6 class="text-muted">Customer</h6>
+                        <h6 class="text-muted">{{ 'field.customer'|trans }}</h6>
                         <p class="mb-1 fw-semibold">{{ reservation.customer.fullName }}</p>
                         <div class="small text-muted">{{ reservation.customer.email }}</div>
                         {% if reservation.customer.phone %}
@@ -30,30 +30,30 @@
                         {% endif %}
                     </div>
                     <div class="col-md-6">
-                        <h6 class="text-muted">Room</h6>
-                        <p class="mb-1 fw-semibold">Room {{ reservation.room.number }} - {{ reservation.room.type }}</p>
-                        <div class="small text-muted">Capacity: {{ reservation.room.capacity }} guests</div>
-                        <div class="small text-muted">Rate: {{ reservation.room.price }} MAD / night</div>
+                        <h6 class="text-muted">{{ 'field.room'|trans }}</h6>
+                        <p class="mb-1 fw-semibold">{{ 'rooms.room_number'|trans({'%number%': reservation.room.number}) }} - {{ reservation.room.type }}</p>
+                        <div class="small text-muted">{{ 'reservation.capacity'|trans({'%count%': reservation.room.capacity}) }}</div>
+                        <div class="small text-muted">{{ 'reservation.rate'|trans({'%price%': reservation.room.price}) }}</div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <h6 class="text-muted">Stay</h6>
-                        <div class="mb-2">Check-in: <strong>{{ reservation.CheckIn ? reservation.CheckIn|date('Y-m-d') : '' }}</strong></div>
-                        <div class="mb-2">Check-out: <strong>{{ reservation.CheckOut ? reservation.CheckOut|date('Y-m-d') : '' }}</strong></div>
-                        <div class="mb-2">Nights: <strong>{{ reservation.nights }}</strong></div>
+                        <h6 class="text-muted">{{ 'reservation.stay'|trans }}</h6>
+                        <div class="mb-2">{{ 'reservation.check_in'|trans }}: <strong>{{ reservation.CheckIn ? reservation.CheckIn|date('Y-m-d') : '' }}</strong></div>
+                        <div class="mb-2">{{ 'reservation.check_out'|trans }}: <strong>{{ reservation.CheckOut ? reservation.CheckOut|date('Y-m-d') : '' }}</strong></div>
+                        <div class="mb-2">{{ 'reservation.nights'|trans }}: <strong>{{ reservation.nights }}</strong></div>
                     </div>
                     <div class="col-md-6">
-                        <h6 class="text-muted">Billing</h6>
+                        <h6 class="text-muted">{{ 'reservation.billing'|trans }}</h6>
                         {% set nights = reservation.nights %}
                         {% set baseAmount = reservation.room.price * nights %}
                         {% set options = reservation.readableOptions %}
                         {% set optionsTotal = reservation.optionsTotal %}
 
                         <ul class="list-unstyled mb-2">
-                            <li>Room: {{ reservation.room.price }} MAD x {{ nights }} night(s) = <strong>{{ baseAmount }} MAD</strong></li>
-                            <li class="mt-2">Options:
+                            <li>{{ 'reservation.billing_room'|trans({'%price%': reservation.room.price, '%nights%': nights}) }} = <strong>{{ baseAmount }} MAD</strong></li>
+                            <li class="mt-2">{{ 'field.options'|trans }}:
                                 {% if options is not empty %}
                                     <ul class="mb-0">
                                         {% for option in options %}
@@ -61,21 +61,21 @@
                                         {% endfor %}
                                     </ul>
                                 {% else %}
-                                    <span class="text-muted">None (0 MAD)</span>
+                                    <span class="text-muted">{{ 'reservation.none'|trans }}</span>
                                 {% endif %}
                             </li>
-                            <li class="mt-2">Options total: <strong>{{ optionsTotal }} MAD</strong></li>
+                            <li class="mt-2">{{ 'reservation.options_total'|trans }}: <strong>{{ optionsTotal }} MAD</strong></li>
                         </ul>
 
-                        <div class="fw-bold fs-5 text-primary">Total: {{ reservation.totalPrice }} MAD</div>
+                        <div class="fw-bold fs-5 text-primary">{{ 'reservation.total'|trans }}: {{ reservation.totalPrice }} MAD</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="d-flex gap-2">
-            <a class="btn btn-secondary" href="{{ path('app_reservation_index') }}">Back</a>
-            <a class="btn btn-warning" href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">Edit</a>
+            <a class="btn btn-secondary" href="{{ path('app_reservation_index') }}">{{ 'action.back'|trans }}</a>
+            <a class="btn btn-warning" href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">{{ 'action.edit'|trans }}</a>
             {{ include('reservation/_delete_form.html.twig') }}
         </div>
     </div>

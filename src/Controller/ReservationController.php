@@ -67,7 +67,7 @@ final class ReservationController extends AbstractController
                 );
 
                 if ($hasOverlap) {
-                    $this->addFlash('danger', 'This room is not available for the selected dates.');
+                    $this->addFlash('danger', 'flash.room_not_available_dates');
 
                     return $this->render('reservation/new.html.twig', [
                         'reservation' => $reservation,
@@ -121,7 +121,7 @@ final class ReservationController extends AbstractController
                 );
 
                 if ($hasOverlap) {
-                    $this->addFlash('danger', 'This room is not available for the selected dates.');
+                    $this->addFlash('danger', 'flash.room_not_available_dates');
 
                     return $this->render('reservation/edit.html.twig', [
                         'reservation' => $reservation,

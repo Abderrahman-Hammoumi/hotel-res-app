@@ -14,7 +14,7 @@ class RoomType extends AbstractType
     {
         if ($options['availability_only']) {
             $builder->add('isAvailable', CheckboxType::class, [
-                'label' => 'Available',
+                'label' => 'field.available',
                 'required' => false,
             ]);
 
@@ -22,12 +22,20 @@ class RoomType extends AbstractType
         }
 
         $builder
-            ->add('number')
-            ->add('type')
-            ->add('capacity')
-            ->add('price')
+            ->add('number', null, [
+                'label' => 'rooms.number',
+            ])
+            ->add('type', null, [
+                'label' => 'rooms.type',
+            ])
+            ->add('capacity', null, [
+                'label' => 'rooms.capacity',
+            ])
+            ->add('price', null, [
+                'label' => 'rooms.price',
+            ])
             ->add('isAvailable', CheckboxType::class, [
-                'label' => 'Available',
+                'label' => 'field.available',
                 'required' => false,
             ])
         ;

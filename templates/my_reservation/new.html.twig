@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Reservation{% endblock %}
+{% block title %}{{ 'my_reservations.new'|trans }}{% endblock %}
 
 {% block stylesheets %}
     <style>
@@ -94,26 +94,26 @@
 <div class="container my-4">
     <div class="booking-shell d-flex justify-content-between align-items-center flex-wrap gap-3 position-relative">
         <div class="position-relative" style="z-index: 1;">
-            <p class="mb-1 text-uppercase small fw-semibold opacity-75">New booking</p>
-            <h1 class="mb-1 fw-bold">Plan your next stay</h1>
-            <span class="opacity-85">Choose your dates, room, and any extras you want.</span>
+            <p class="mb-1 text-uppercase small fw-semibold opacity-75">{{ 'my_reservations.new_booking'|trans }}</p>
+            <h1 class="mb-1 fw-bold">{{ 'my_reservations.plan_stay'|trans }}</h1>
+            <span class="opacity-85">{{ 'my_reservations.plan_stay_subtitle'|trans }}</span>
         </div>
-        <a class="pill-btn text-decoration-none position-relative" style="z-index: 1;" href="{{ path('app_my_reservations') }}">Back to my reservations</a>
+        <a class="pill-btn text-decoration-none position-relative" style="z-index: 1;" href="{{ path('app_my_reservations') }}">{{ 'my_reservations.back'|trans }}</a>
     </div>
 
     <div class="booking-card p-4">
         {{ form_start(form) }}
         <div class="row g-4">
             <div class="col-md-6">
-                <div class="section-title mb-3">Dates</div>
+                <div class="section-title mb-3">{{ 'reservation.form.dates'|trans }}</div>
                 <div class="form-panel">
                     <div class="mb-3">
-                        {{ form_label(form.CheckIn, 'Check In Date') }}
+                        {{ form_label(form.CheckIn, 'reservation.form.check_in'|trans) }}
                         {{ form_widget(form.CheckIn, {'attr': {'class': 'form-control'}}) }}
                         {{ form_errors(form.CheckIn) }}
                     </div>
                     <div class="mb-0">
-                        {{ form_label(form.CheckOut, 'Check Out Date') }}
+                        {{ form_label(form.CheckOut, 'reservation.form.check_out'|trans) }}
                         {{ form_widget(form.CheckOut, {'attr': {'class': 'form-control'}}) }}
                         {{ form_errors(form.CheckOut) }}
                     </div>
@@ -121,17 +121,17 @@
             </div>
 
             <div class="col-md-6">
-                <div class="section-title mb-3">Room</div>
+                <div class="section-title mb-3">{{ 'reservation.form.room'|trans }}</div>
                 <div class="form-panel mb-3">
                     <div class="mb-0">
-                        {{ form_label(form.room, 'Select Room') }}
+                        {{ form_label(form.room, 'reservation.form.select_room'|trans) }}
                         {{ form_widget(form.room, {'attr': {'class': 'form-select'}}) }}
                         {{ form_errors(form.room) }}
                     </div>
                 </div>
 
-                <div class="section-title mb-2">Extras</div>
-                <p class="text-muted small mb-3">Optional services are billed once per stay.</p>
+                <div class="section-title mb-2">{{ 'reservation.form.extras'|trans }}</div>
+                <p class="text-muted small mb-3">{{ 'reservation.form.extras_help'|trans }}</p>
                 <div class="d-flex flex-column gap-2">
                     {% for optionField in form.options %}
                         <div class="option-pill d-flex align-items-center gap-2">
@@ -144,7 +144,7 @@
             </div>
         </div>
 
-        <button class="btn btn-primary w-100 mt-4 submit-bar">Submit reservation</button>
+        <button class="btn btn-primary w-100 mt-4 submit-bar">{{ 'my_reservations.submit'|trans }}</button>
         {{ form_end(form) }}
     </div>
 </div>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My Reservations{% endblock %}
+{% block title %}{{ 'nav.my_reservations'|trans }}{% endblock %}
 
 {% block stylesheets %}
     <style>
@@ -38,22 +38,22 @@
 {% endblock %}
 
 {% block body %}
-<div class="container my-4">
+<div class="my-4">
     <div class="hero mb-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
         <div>
-            <p class="mb-2 text-uppercase small fw-semibold opacity-75">Welcome back</p>
-            <h1 class="mb-1">Your stays, at a glance</h1>
-            <p class="mb-0">Check the status of your bookings and plan your next visit.</p>
+            <p class="mb-2 text-uppercase small fw-semibold opacity-75">{{ 'my_reservations.welcome_back'|trans }}</p>
+            <h1 class="mb-1">{{ 'my_reservations.hero_title'|trans }}</h1>
+            <p class="mb-0">{{ 'my_reservations.hero_subtitle'|trans }}</p>
         </div>
         <div class="d-flex gap-2">
-            <a class="btn btn-light text-primary fw-semibold" href="{{ path('app_my_reservation_new') }}">+ New reservation</a>
-            <a class="btn btn-outline-light" href="{{ path('app_logout') }}">Logout</a>
+            <a class="btn btn-light text-primary fw-semibold" href="{{ path('app_my_reservation_new') }}">+ {{ 'my_reservations.new'|trans }}</a>
+            <a class="btn btn-outline-light" href="{{ path('app_logout') }}">{{ 'nav.logout'|trans }}</a>
         </div>
     </div>
 
     {% if customer is null %}
         <div class="alert alert-info glass">
-            We could not find your customer profile. If you just registered, please contact reception to link your reservations.
+            {{ 'my_reservations.customer_missing_hint'|trans }}
         </div>
     {% endif %}
 
@@ -62,25 +62,25 @@
             <div class="col-12 col-md-6">
                 <div class="glass reservation-card h-100">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <div class="fw-bold">Room {{ reservation.room.number }} • {{ reservation.room.type }}</div>
+                        <div class="fw-bold">{{ 'my_reservations.room_line'|trans({'%number%': reservation.room.number, '%type%': reservation.room.type}) }}</div>
                         {% if reservation.status == 'pending' %}
-                            <span class="status-pill status-pending">Pending</span>
+                            <span class="status-pill status-pending">{{ 'reservation.status.pending'|trans }}</span>
                         {% elseif reservation.status == 'confirmed' %}
-                            <span class="status-pill status-approved">Approved</span>
+                            <span class="status-pill status-approved">{{ 'reservation.status.confirmed'|trans }}</span>
                         {% elseif reservation.status == 'canceled' %}
-                            <span class="status-pill status-canceled">Canceled</span>
+                            <span class="status-pill status-canceled">{{ 'reservation.status.canceled'|trans }}</span>
                         {% else %}
                             <span class="status-pill bg-secondary text-white">{{ reservation.status }}</span>
                         {% endif %}
                     </div>
-                    <div class="text-muted small mb-2">{{ reservation.room.price }} MAD / night</div>
+                    <div class="text-muted small mb-2">{{ 'my_reservations.rate'|trans({'%price%': reservation.room.price}) }}</div>
                     <div class="row small mb-2">
                         <div class="col-6">
-                            <div class="text-muted">Check in</div>
+                            <div class="text-muted">{{ 'reservation.check_in'|trans }}</div>
                             <div class="fw-semibold">{{ reservation.CheckIn ? reservation.CheckIn|date('Y-m-d') : '' }}</div>
                         </div>
                         <div class="col-6">
-                            <div class="text-muted">Check out</div>
+                            <div class="text-muted">{{ 'reservation.check_out'|trans }}</div>
                             <div class="fw-semibold">{{ reservation.CheckOut ? reservation.CheckOut|date('Y-m-d') : '' }}</div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
         {% else %}
             <div class="col-12">
                 <div class="glass p-4 text-center text-muted">
-                    No reservations yet. <a href="{{ path('app_my_reservation_new') }}">Create your first one</a>.
+                    {{ 'my_reservations.none_yet'|trans }} <a href="{{ path('app_my_reservation_new') }}">{{ 'my_reservations.create_first'|trans }}</a>.
                 </div>
             </div>
         {% endfor %}

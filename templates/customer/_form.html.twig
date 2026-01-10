@@ -1,25 +1,25 @@
 {{ form_start(form) }}
 
 <div class="mb-3">
-    {{ form_label(form.FullName, 'Full Name') }}
-    {{ form_widget(form.FullName, {'attr': {'class': 'form-control', 'placeholder': 'Customer full name'}}) }}
+    {{ form_label(form.FullName, 'customer.form.full_name'|trans) }}
+    {{ form_widget(form.FullName, {'attr': {'class': 'form-control', 'placeholder': 'customer.placeholder.full_name'|trans}}) }}
     {{ form_errors(form.FullName) }}
 </div>
 
 <div class="mb-3">
-    {{ form_label(form.email, 'Email Address') }}
-    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'example@gmail.com'}}) }}
+    {{ form_label(form.email, 'auth.email'|trans) }}
+    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'customer.placeholder.email'|trans}}) }}
     {{ form_errors(form.email) }}
 </div>
 
 <div class="mb-3">
-    {{ form_label(form.phone, 'Phone Number') }}
-    {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder': '+212 6xx-xxxxxx'}}) }}
+    {{ form_label(form.phone, 'customer.form.phone'|trans) }}
+    {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder': 'customer.placeholder.phone'|trans}}) }}
     {{ form_errors(form.phone) }}
 </div>
 
 <button class="btn btn-primary w-100 mt-3">
-    {{ button_label|default('Save') }}
+    {{ (button_label|default('action.save'))|trans }}
 </button>
 
 {{ form_end(form) }}

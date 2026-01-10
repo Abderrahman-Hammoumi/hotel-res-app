@@ -3,7 +3,7 @@
 {% if form.number is defined %}
     <div class="mb-3">
         {{ form_label(form.number) }}
-        {{ form_widget(form.number, {'attr': {'class': 'form-control', 'placeholder': 'Room number'}}) }}
+        {{ form_widget(form.number, {'attr': {'class': 'form-control', 'placeholder': 'room.placeholder.number'|trans }}) }}
         {{ form_errors(form.number) }}
     </div>
 {% endif %}
@@ -11,7 +11,7 @@
 {% if form.type is defined %}
     <div class="mb-3">
         {{ form_label(form.type) }}
-        {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'Single / Double / Suite'}}) }}
+        {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'room.placeholder.type'|trans }}) }}
         {{ form_errors(form.type) }}
     </div>
 {% endif %}
@@ -19,7 +19,7 @@
 {% if form.capacity is defined %}
     <div class="mb-3">
         {{ form_label(form.capacity) }}
-        {{ form_widget(form.capacity, {'attr': {'class': 'form-control', 'placeholder': 'Number of guests'}}) }}
+        {{ form_widget(form.capacity, {'attr': {'class': 'form-control', 'placeholder': 'room.placeholder.capacity'|trans }}) }}
         {{ form_errors(form.capacity) }}
     </div>
 {% endif %}
@@ -27,7 +27,7 @@
 {% if form.price is defined %}
     <div class="mb-3">
         {{ form_label(form.price) }}
-        {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'Price per night'}}) }}
+        {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'room.placeholder.price'|trans }}) }}
         {{ form_errors(form.price) }}
     </div>
 {% endif %}
@@ -39,6 +39,6 @@
     </div>
 {% endif %}
 
-<button class="btn btn-primary w-100">{{ button_label|default('Save') }}</button>
+<button class="btn btn-primary w-100">{{ (button_label|default('action.save'))|trans }}</button>
 
 {{ form_end(form) }}

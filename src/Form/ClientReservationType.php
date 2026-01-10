@@ -19,17 +19,19 @@ class ClientReservationType extends AbstractType
         $builder
             ->add('CheckIn', DateType::class, [
                 'widget' => 'single_text',
+                'label' => 'reservation.form.check_in',
             ])
             ->add('CheckOut', DateType::class, [
                 'widget' => 'single_text',
+                'label' => 'reservation.form.check_out',
             ])
             ->add('options', ChoiceType::class, [
                 'choices' => $this->getOptionChoices(),
                 'expanded' => true,
                 'multiple' => true,
                 'required' => false,
-                'label' => 'Additional options',
-                'help' => 'Optional services are billed once per stay.',
+                'label' => 'reservation.form.extras',
+                'help' => 'reservation.form.extras_help',
             ])
             ->add('room', EntityType::class, [
                 'class' => Room::class,
@@ -42,7 +44,7 @@ class ClientReservationType extends AbstractType
                         ->setParameter('available', true)
                         ->orderBy('r.number', 'ASC');
                 },
-                'label' => 'Select Room',
+                'label' => 'reservation.form.select_room',
             ]);
     }
 

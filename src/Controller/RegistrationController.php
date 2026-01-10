@@ -33,7 +33,7 @@ final class RegistrationController extends AbstractController
 
             $existing = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
             if ($existing) {
-                $this->addFlash('danger', 'An account with this email already exists. Please log in.');
+                $this->addFlash('danger', 'flash.account_exists');
             } else {
                 $user = new User();
                 $user->setEmail($email);
@@ -51,7 +51,7 @@ final class RegistrationController extends AbstractController
                 $entityManager->persist($customer);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Account created. You can now log in.');
+                $this->addFlash('success', 'flash.account_created');
 
                 return $this->redirectToRoute('app_login');
             }

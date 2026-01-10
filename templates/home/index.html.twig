@@ -1,16 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard | HotelRes{% endblock %}
+{% block title %}{{ 'nav.dashboard'|trans }} | {{ 'app.name'|trans }}{% endblock %}
 
 {% block body %}
-<h1 class="fw-bold mb-4">Dashboard</h1>
+<div class="app-hero mb-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
+    <div>
+        <p class="mb-1 text-uppercase small fw-semibold opacity-75">{{ 'dashboard.subtitle'|trans }}</p>
+        <h1 class="mb-1 fw-bold">{{ 'dashboard.title'|trans }}</h1>
+        <p class="mb-0">{{ 'dashboard.description'|trans }}</p>
+    </div>
+</div>
 
 <div class="row g-4">
 
     <div class="col-md-3">
         <div class="card shadow-sm border-0">
             <div class="card-body">
-                <h6 class="text-muted">Total Rooms</h6>
+                <h6 class="text-muted">{{ 'dashboard.total_rooms'|trans }}</h6>
                 <h2 class="fw-bold">{{ totalRooms }}</h2>
             </div>
         </div>
@@ -19,7 +25,7 @@
     <div class="col-md-3">
         <div class="card shadow-sm border-0">
             <div class="card-body">
-                <h6 class="text-muted">Available Rooms</h6>
+                <h6 class="text-muted">{{ 'dashboard.available_rooms'|trans }}</h6>
                 <h2 class="fw-bold text-success">{{ availableRooms }}</h2>
             </div>
         </div>
@@ -28,7 +34,7 @@
     <div class="col-md-3">
         <div class="card shadow-sm border-0">
             <div class="card-body">
-                <h6 class="text-muted">Reservations</h6>
+                <h6 class="text-muted">{{ 'dashboard.reservations'|trans }}</h6>
                 <h2 class="fw-bold">{{ totalReservations }}</h2>
             </div>
         </div>
@@ -37,7 +43,7 @@
     <div class="col-md-3">
         <div class="card shadow-sm border-0">
             <div class="card-body">
-                <h6 class="text-muted">Customers</h6>
+                <h6 class="text-muted">{{ 'dashboard.customers'|trans }}</h6>
                 <h2 class="fw-bold">{{ totalCustomers }}</h2>
             </div>
         </div>
@@ -47,18 +53,18 @@
 
 <div class="mt-5">
     {% if is_granted('ROLE_RECEPTIONIST') %}
-        <h4 class="fw-bold mb-3">Quick Actions</h4>
+        <h4 class="fw-bold mb-3">{{ 'dashboard.quick_actions'|trans }}</h4>
 
         <div class="d-flex flex-wrap gap-2">
             {% if is_granted('ROLE_ADMIN') %}
-                <a class="btn btn-primary" href="{{ path('app_room_new') }}">Add Room</a>
+                <a class="btn btn-primary" href="{{ path('app_room_new') }}">{{ 'dashboard.add_room'|trans }}</a>
             {% endif %}
-            <a class="btn btn-secondary" href="{{ path('app_customer_new') }}">Add Customer</a>
-            <a class="btn btn-success" href="{{ path('app_reservation_new') }}">Add Reservation</a>
+            <a class="btn btn-secondary" href="{{ path('app_customer_new') }}">{{ 'dashboard.add_customer'|trans }}</a>
+            <a class="btn btn-success" href="{{ path('app_reservation_new') }}">{{ 'dashboard.add_reservation'|trans }}</a>
         </div>
     {% elseif is_granted('ROLE_CLIENT') %}
-        <h4 class="fw-bold mb-3">Your account</h4>
-        <a class="btn btn-outline-primary" href="{{ path('app_my_reservations') }}">View my reservations</a>
+        <h4 class="fw-bold mb-3">{{ 'dashboard.your_account'|trans }}</h4>
+        <a class="btn btn-outline-primary" href="{{ path('app_my_reservations') }}">{{ 'dashboard.view_my_reservations'|trans }}</a>
     {% endif %}
 </div>
 {% endblock %}

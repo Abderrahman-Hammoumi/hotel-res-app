@@ -63,7 +63,7 @@ final class MyReservationController extends AbstractController
         $customer = $customerRepository->findOneBy(['email' => $user->getEmail()]);
 
         if (!$customer) {
-            $this->addFlash('danger', 'We could not find your customer profile. Please contact reception.');
+            $this->addFlash('danger', 'flash.customer_profile_missing');
             return $this->redirectToRoute('app_my_reservations');
         }
 
@@ -84,7 +84,7 @@ final class MyReservationController extends AbstractController
                 );
 
                 if ($hasOverlap) {
-                    $this->addFlash('danger', 'This room is not available for the selected dates.');
+                    $this->addFlash('danger', 'flash.room_not_available_dates');
 
                     return $this->render('my_reservation/new.html.twig', [
                         'form' => $form,
@@ -95,7 +95,7 @@ final class MyReservationController extends AbstractController
             $entityManager->persist($reservation);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Reservation submitted. You will be notified when it is approved.');
+            $this->addFlash('success', 'flash.reservation_submitted');
             $this->auditLogger->info('Client reservation created', [
                 'reservationId' => $reservation->getId(),
                 'roomId' => $reservation->getRoom()?->getId(),

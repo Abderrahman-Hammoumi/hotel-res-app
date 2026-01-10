@@ -1,3 +1,96 @@
+/* App theme (Bootstrap-friendly) */
+:root {
+    --app-bg-1: #f6f8ff;
+    --app-bg-2: #f3f7ff;
+    --app-ink: #0f172a;
+    --app-muted: #64748b;
+    --app-border: rgba(15, 23, 42, 0.08);
+    --app-surface: rgba(255, 255, 255, 0.86);
+}
+
+html,
 body {
-    background-color: skyblue;
+    height: 100%;
+}
+
+body {
+    color: var(--app-ink);
+    background:
+        radial-gradient(900px 320px at 12% -10%, rgba(99, 102, 241, 0.18), transparent 55%),
+        radial-gradient(900px 320px at 88% -10%, rgba(20, 184, 166, 0.18), transparent 55%),
+        linear-gradient(180deg, var(--app-bg-1), var(--app-bg-2));
+}
+
+html[dir="rtl"] body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Tahoma, Arial, "Noto Sans Arabic",
+        "Noto Naskh Arabic", "Cairo", sans-serif;
+}
+
+.navbar.app-navbar {
+    background: var(--app-surface) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--app-border);
+}
+
+.app-navbar .navbar-brand {
+    letter-spacing: 0.2px;
+}
+
+.app-navbar .nav-link {
+    color: var(--app-ink);
+}
+
+.app-navbar .nav-link.active {
+    font-weight: 700;
+}
+
+.app-navbar .nav-link:hover {
+    color: #1d4ed8;
+}
+
+.card {
+    border-radius: 16px;
+    border: 1px solid var(--app-border);
+}
+
+.card-header {
+    border-bottom: 1px solid var(--app-border);
+}
+
+.table > :not(caption) > * > * {
+    border-color: rgba(15, 23, 42, 0.07);
+}
+
+.btn {
+    border-radius: 12px;
+}
+
+.btn.btn-sm {
+    border-radius: 10px;
+}
+
+.app-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    padding: 22px 22px;
+    background: linear-gradient(120deg, #2563eb, #14b8a6);
+    color: #fff;
+    box-shadow: 0 18px 45px rgba(2, 6, 23, 0.14);
+}
+
+.app-hero::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    filter: blur(14px);
+    top: -90px;
+    inset-inline-end: 12%;
+}
+
+.app-hero p {
+    color: rgba(255, 255, 255, 0.9);
 }

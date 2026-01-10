@@ -93,7 +93,7 @@ final class CustomerController extends AbstractController
             $email = $customer->getEmail();
             $entityManager->remove($customer);
             $entityManager->flush();
-            $this->addFlash('success', 'Customer deleted.');
+            $this->addFlash('success', 'flash.customer_deleted');
             $this->auditLogger->info('Customer deleted', [
                 'customerId' => $customerId,
                 'email' => $email,

@@ -1,43 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Room Details{% endblock %}
+{% block title %}{{ 'room.details.title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h3 class="mb-0">Room Details</h3>
+        <div class="card-header">
+            <h3 class="mb-0">{{ 'room.details.title'|trans }}</h3>
         </div>
 
         <div class="card-body">
             <table class="table table-bordered">
                 <tbody>
                     <tr>
-                        <th>ID</th>
+                        <th>{{ 'field.id'|trans }}</th>
                         <td>{{ room.id }}</td>
                     </tr>
                     <tr>
-                        <th>Number</th>
+                        <th>{{ 'rooms.number'|trans }}</th>
                         <td>{{ room.number }}</td>
                     </tr>
                     <tr>
-                        <th>Type</th>
+                        <th>{{ 'rooms.type'|trans }}</th>
                         <td>{{ room.type }}</td>
                     </tr>
                     <tr>
-                        <th>Capacity</th>
-                        <td>{{ room.capacity }} guests</td>
+                        <th>{{ 'rooms.capacity'|trans }}</th>
+                        <td>{{ 'rooms.guests'|trans({'%count%': room.capacity}) }}</td>
                     </tr>
                     <tr>
-                        <th>Price</th>
+                        <th>{{ 'rooms.price'|trans }}</th>
                         <td><strong>{{ room.price }} MAD</strong></td>
                     </tr>
                     <tr>
-                        <th>Available</th>
+                        <th>{{ 'field.available'|trans }}</th>
                         <td>
                             {% if room.isAvailable %}
-                                <span class="badge bg-success">Yes</span>
+                                <span class="badge bg-success">{{ 'common.yes'|trans }}</span>
                             {% else %}
-                                <span class="badge bg-danger">No</span>
+                                <span class="badge bg-danger">{{ 'common.no'|trans }}</span>
                             {% endif %}
                         </td>
                     </tr>
@@ -45,8 +45,8 @@
             </table>
 
             <div class="d-flex gap-2">
-                <a class="btn btn-secondary" href="{{ path('app_room_index') }}">Back</a>
-                <a class="btn btn-warning" href="{{ path('app_room_edit', {'id': room.id}) }}">Edit</a>
+                <a class="btn btn-secondary" href="{{ path('app_room_index') }}">{{ 'action.back'|trans }}</a>
+                <a class="btn btn-warning" href="{{ path('app_room_edit', {'id': room.id}) }}">{{ 'action.edit'|trans }}</a>
                 {% if is_granted('ROLE_ADMIN') %}
                     {{ include('room/_delete_form.html.twig') }}
                 {% endif %}
